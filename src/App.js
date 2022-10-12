@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import Home from "./home/home.js";
+import AddProduct from "./product/productAdd";
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,9 +33,9 @@ function App() {
           {/* <Route path="/about">
             <About />
           </Route> */}
-          {/* <Route path="/users">
-            <Users />
-          </Route> */}
+          <Route path="/addproduct">
+            <AddProduct />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
