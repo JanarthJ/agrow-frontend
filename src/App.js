@@ -7,6 +7,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import Dashboard from './components/dashboard/dashboard';
 
 
 function App() {
@@ -33,6 +34,10 @@ function App() {
           {/* <Route path="/about">
             <About />
           </Route> */}
+          
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
           <Route path="/addproduct">
             <AddProduct />
           </Route>
