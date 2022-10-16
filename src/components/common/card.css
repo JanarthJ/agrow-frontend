@@ -5,6 +5,10 @@
     border-radius: 10px;
 }
 
+.card-container > div > div:first-child, .card-container > div > div:last-child{
+    padding: 10px;
+}
+
 .card-innercontainer{
     
 }
@@ -28,8 +32,13 @@
 }
 
 .card-button > button {
-    background-color: antiquewhite;
+    background-color: transparent;
     border: none;
-    border-radius:3px;
-    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px 30px;
+}
+
+.card-button > button:hover {
+    background-color: aliceblue;
 }

@@ -1,0 +1,16 @@
+.productdesc {
+
+}
+
+.productdesc > .productdesc-title{
+
+}
+
+.productdesc > .productdesc-product{
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+}
+
+.productdesc > .productdesc-product > .productdesc-product-banner{
+    margin: auto 0px;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import "./card.css";
 
 export class Card extends Component {
@@ -20,7 +21,7 @@ export class Card extends Component {
                 </div>
 
                 {/* Buttons */}
-                <div className='card-button'><button href="/productdesc">View Product</button></div>
+                <div className='card-button'><Link to="/productdesc">View Product</Link></div>
             </div>
         </div>
       </div>

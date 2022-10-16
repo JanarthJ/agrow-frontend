@@ -4,10 +4,11 @@ import Home from "./home/home.js";
 import AddProduct from "./product/productAdd";
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
+  BrowserRouter,
 } from "react-router-dom";
 import Dashboard from './components/dashboard/dashboard';
+import ProductDesc from './components/product-desc/product-desc.component';
 
 
 function App() {
@@ -30,21 +31,24 @@ function App() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
+        <BrowserRouter>
           {/* <Route path="/about">
             <About />
           </Route> */}
           
-          <Route path="/dashboard">
+          <Route exact path="/productdesc">
+            <ProductDesc />
+          </Route>
+          <Route exact path="/dashboard">
             <Dashboard />
           </Route>
-          <Route path="/addproduct">
+          <Route exact path="/addproduct">
             <AddProduct />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
-        </Switch>
+        </BrowserRouter>
       </div>
     </Router>
   );

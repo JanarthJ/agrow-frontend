@@ -28,7 +28,7 @@ export class Dashboard extends Component {
         {/* Top Area */}
 
         <div className="dashboard-top">
-
+          <h1>Dashboard</h1>
         </div>
 
         {/* Center Area */}
