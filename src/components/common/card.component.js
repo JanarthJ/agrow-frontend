@@ -3,25 +3,41 @@ import { Link } from 'react-router-dom';
 import "./card.css";
 
 export class Card extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      product : {}
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.props);
+    this.setState({product : this.props.productDetails}, () => {
+      console.log(this.state.product);
+    })
+  }
+
+
   render() {
     return (
-      <div>
+      this.state.product &&  <div>
         {/* Outer Container */}
         <div className="card-container">
             {/* Inner Container */}
             <div>
                 {/* Title */}
                 <div className="card-title">
-                    Product 1
+                    {this.state.product.pdname}
                 </div>
 
                 {/* Image */}
                 <div className='card-image'>
-                    <img alt="products" src="https://cdn.shopify.com/s/files/1/0722/2059/products/GREEN-MAGIC-BROCCOLI_280x.jpg?v=1568889205" />
+                    <img alt="products" src={this.state.product.pdimage} />
                 </div>
 
                 {/* Buttons */}
-                <div className='card-button'><Link to="/productdesc">View Product</Link></div>
+                <div className='card-button'><Link to={`productdesc/${this.state.product._id}`}>View Product</Link></div>
             </div>
         </div>
       </div>

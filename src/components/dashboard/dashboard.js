@@ -3,6 +3,47 @@ import Card from '../common/card.component'
 import "./dashboard.css";
 
 export class Dashboard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state ={
+      products : []
+    }
+  }
+
+
+  componentWillMount(){
+    // const {history} = this.props;
+
+    // const supportHistory = 'pushState' in window.History;
+
+    // if(supportHistory) {
+    //   history.pushState(null,'/');
+    // }
+    // else{
+    //   window.location='/dashboard';
+    // }
+
+    
+
+    this.getAllProducts();
+  }
+
+
+  getAllProducts() {
+    fetch('http://localhost:8080/api/products/getAllProducts', {
+      method:"GET",
+      skip:0,
+      limit:20
+    }).then((response) => response.json()).then((data) => {
+      this.setState({products: data.data}, () => {
+        console.log(this.state.products);
+      });
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
   render() {
     return (
       <div>
@@ -33,12 +74,13 @@ export class Dashboard extends Component {
 
         {/* Center Area */}
         <div className="dashboard-card-grid">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {
+            this.state.products.length !==  0 ? this.state.products.map((product,id) => {        
+              return(
+                <Card productDetails={product} key={id} />
+              )
+            }) : <div>No Products</div>
+          }
         </div>
       </div>
     )

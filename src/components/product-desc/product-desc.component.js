@@ -2,9 +2,66 @@ import React, { Component } from 'react'
 import "../product-desc/product-desc.css";
 
 export class ProductDesc extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      user : {
+        id: "61d5b954c2bb12e98b319b14",
+        name : "Kishore"
+      },
+      product : ""
+    }
+  }
+
+  componentDidMount() {
+    console.log(window.location.href.split("/")[4]);
+    const productID = window.location.href.split("/")[4];
+    this.getProductDetails(productID);
+  }
+
+  getProductDetails(id) {
+    fetch('http://localhost:8080/api/products/getProduct', {
+      method:"POST",
+      body: JSON.stringify({
+        id: id
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+     }
+    }).then((response) => response.json()).then((data) => {
+      this.setState({product: data.data[0]}, () => {
+        console.log(this.state.product);
+      });
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  OrderNow() {
+
+    var data = {};
+    data.placedBy = this.state.user.id;
+    data.products = this.state.product;
+    data.totalPrice = this.state.product.pdprice;
+
+    fetch('http://localhost:8080/api/orders/createOrder',{
+      method: "POST",
+      body: JSON.stringify({
+        placedBy : this.state.user.id,
+        products : [this.state.product],
+        totalPrice : this.state.product.pdprice
+      })
+    }).then((response) => response.json()).then((orders) => {
+      console.log(orders);
+      alert("Order Placed");
+    }).catch((error) => console.log(error))
+  }
+
+
   render() {
     return (
-      <div className="productdesc">
+      this.state.product && <div className="productdesc">
         {/* Title */}
         <div className='productdesc-title'>
             <h1>Product Information</h1>
@@ -13,17 +70,17 @@ export class ProductDesc extends Component {
         {/* Product Commercial */}
         <div className='productdesc-product'>
             <div className='productdesc-product-banner'>
-                <img alt="product" src="https://cdn.shopify.com/s/files/1/0722/2059/products/GREEN-MAGIC-BROCCOLI_280x.jpg?v=1568889205" />
+                <img alt="product" src={this.state.product.pdimage} />
             </div>
 
             <div>
                 {/* Product Information */}
-                <p>Product 1</p>
-                <p>Brand : Sakata</p>
-                <p>Price : 500</p>
-                <p>product details</p>
-
-                <button>Add to cart</button>
+                <p>{this.state.product.pdname}</p>
+                <p>Area : {this.state.product.pdarea}</p>
+                <p>Price : {this.state.product.pdprice}</p>
+                <p>{this.state.product.pddesc}</p>
+                <p>Quantity : {this.state.product.pdqty}</p>
+                <button onClick={() => this.OrderNow()}>Order Now</button>
             </div>
         </div>
         
